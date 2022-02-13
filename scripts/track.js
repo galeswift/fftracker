@@ -720,6 +720,8 @@ function SetModes() {
 							break;
 						case 'NOFREE':
 							modeflags.cnofree = true;
+							modeflags.nchars = true;
+							flagsReadable += 'No Free characters';
 							break;
 						case 'J:SPELLS':
 							modeflags.cjspells = true;
@@ -756,12 +758,7 @@ function SetModes() {
 							}
 							if (keys[k].startsWith('PARTY')) {
 								modeflags.climit = keys[k].substring(6);
-							}
-                            if (keys[k].startsWith('NOFREE')) {
-                                modeflags.nchars = true;
-                                flagsReadable += 'No Free characters';
-                            }
-
+							}                          
                             if (keys[k].startsWith('NOEARNED')) {
                                 modeflags.cnoearned = true;
                                 flagsReadable += 'No Earned characters';
