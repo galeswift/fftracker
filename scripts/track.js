@@ -770,58 +770,58 @@ function SetModes() {
                                     var characterAvailable = anystart === true || cstartstring.includes(cha[j]);
 									switch (cha[j]) {
 										case 'CECIL':
-                                            modeflags.ccecil = (characterAvailable ? true : false);
+                                            modeflags.ccecil = characterAvailable;
 											break;
 										case 'KAIN':
-                                            modeflags.ckain = (characterAvailable ? true : false);
+                                            modeflags.ckain = characterAvailable;
 											break;
 										case 'RYDIA':
-                                            modeflags.crydia = (characterAvailable ? true : false);
+                                            modeflags.crydia = characterAvailable;
 											break;
 										case 'TELLAH':
-                                            modeflags.ctellah = (characterAvailable ? true : false);
+                                            modeflags.ctellah = characterAvailable;
 											break;
 										case 'EDWARD':
-                                            modeflags.cedward = (characterAvailable ? true : false);
+                                            modeflags.cedward = characterAvailable;
 											break;
 										case 'ROSA':
-                                            modeflags.crosa = (characterAvailable ? true : false);
+                                            modeflags.crosa = characterAvailable;
 											break;
 										case 'YANG':
-                                            modeflags.cyang = (characterAvailable ? true : false);
+                                            modeflags.cyang = characterAvailable;
 											break;
 										case 'PALOM':
-                                            modeflags.cpalom = (characterAvailable ? true : false);
+                                            modeflags.cpalom = characterAvailable;
 											break;
 										case 'POROM':
-                                            modeflags.cporom = (characterAvailable ? true : false);
+                                            modeflags.cporom = characterAvailable;
 											break;
 										case 'CID':
-                                            modeflags.ccid = (characterAvailable ? true : false);
+                                            modeflags.ccid = characterAvailable;
 											break;
 										case 'EDGE':
-                                            modeflags.cedge = (characterAvailable ? true : false);
+                                            modeflags.cedge = characterAvailable;
 											break;
 										case 'FUSOYA':
-                                            modeflags.cfusoya = (characterAvailable ? true : false);
+                                            modeflags.cfusoya = characterAvailable;
 											break;
 									}
 								}
 							}
 							
-							if (keys[k].startsWith('ONLY')) {
-								modeflags.ccecil = false;
-								modeflags.ckain = false;
-								modeflags.crydia = false;
-								modeflags.ctellah = false;
-								modeflags.cedward = false;
-								modeflags.crosa = false;
-								modeflags.cyang = false;
-								modeflags.cpalom = false;
-								modeflags.cporom = false;
-								modeflags.ccid = false;
-								modeflags.cedge = false;
-								modeflags.cfusoya = false;
+							if (keys[k].startsWith('ONLY')) {								
+								modeflags.ccecil = cstartstring.includes('CECIL');
+								modeflags.ckain = cstartstring.includes('KAIN');
+								modeflags.crydia = cstartstring.includes('RYDIA');
+								modeflags.ctellah = cstartstring.includes('TELLAH');
+								modeflags.cedward = cstartstring.includes('EDWARD');
+								modeflags.crosa = cstartstring.includes('ROSA');
+								modeflags.cyang = cstartstring.includes('YANG');
+								modeflags.cpalom = cstartstring.includes('PALOM');
+								modeflags.cporom = cstartstring.includes('POROM');
+								modeflags.ccid = cstartstring.includes('CID');
+								modeflags.cedge = cstartstring.includes('EDGE');
+								modeflags.cfusoya = cstartstring.includes('FUSOYA');
 								
 								var cha = keys[k].substring(5).split(',');
 								for (var j in cha) {
