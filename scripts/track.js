@@ -2202,8 +2202,6 @@ function timerUpdate() {
 }
 
 function StartTimer() {
-    timerStartTime = Date.now() - 44 * 60 * 1000;
-
     document.getElementById('startButton').style.display = "none";
     document.getElementById('pauseButton').style.display = "block";
     document.getElementById('resetButton').style.display = "block";
