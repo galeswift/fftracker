@@ -32,7 +32,7 @@ const KeyItem = {
     SPOON: 14,
     PINK_TAIL: 15,
     CRYSTAL: 16,
-    PASS: 17,
+    PASS: 17
 };
 const KeyItemCheck = {
     ADAMANT: 0,

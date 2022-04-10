@@ -1,5 +1,6 @@
 var characters = [false,false,false,false,false,false,false,false,false,false,false,false];
 var keyitems = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var keyitemsRequiredForGoMode = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var bosses = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
 
 var keyitemlocations = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -12,7 +13,26 @@ var objectives = [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 //0-98 and the last two being win/crystal objectives
 //0 = Unchecked, 1 = Checked, 2 = Hidden
 // 0 = Not available, 1 = Available, 2 = Checked, 3 = Hidden
-
+var keyItemNames = [
+"Baron Key",
+"Luca Key",
+"Magma Key",
+"Tower Key",
+"Darkness Crystal",
+"Earth Crystal",
+"Hook",
+"Twinharp",
+"Package",
+"Pan",
+"Sandruby",
+"Rat Tail",
+"Adamant",
+"Legend Sword",
+"Spoon",
+"Pink Tail",
+"Crystal",
+"Pass"
+]
 var objectivenames = ['Get Cecil','Get Kain','Get Rydia','Get Tellah','Get Edward','Get Rosa','Get Yang','Get Palom','Get Porom','Get Cid','Get Edge','Get FuSoYa','Defeat D.Mist','Defeat Officer','Defeat Octomamm','Defeat Antlion','Defeat Waterhag (boss version)','Defeat MomBomb','Defeat the Fabul Gauntlet','Defeat Milon','Defeat Milon Z.','Defeat D.Knight','Defeat the Guards (boss)','Defeat Karate','Defeat Baigan','Defeat Kainazzo','Defeat the Dark Elf (dragon form)','Defeat the Magus Sisters','Defeat Valvalis','Defeat Calbrena','Defeat Golbez','Defeat Dr. Lugae','Defeat the Dark Imps (boss)','Defeat K.Eblan and Q.Eblan','Defeat Rubicant','Defeat EvilWall','Defeat Asura','Defeat Leviatan','Defeat Odin','Defeat Bahamut','Defeat Elements','Defeat CPU','Defeat Pale Dim','Defeat Wyvern','Defeat Plague','Defeat the D.Lunars','Defeat Ogopogo','Defeat the boss of the Mist Cave','Defeat the boss of the Waterfall','Complete the Antlion Nest','Rescue the hostage on Mt. Hobs','Defend Fabul','Complete Mt. Ordeals','Defeat the bosses of Baron Inn','Liberate Baron Castle','Complete Cave Magnes','Complete the Tower of Zot','Defeat the bosses of Dwarf Castle','Defeat the boss of Lower Bab-il','Launch the Falcon','Complete the Sealed Cave','Defeat the queen at the Town of Monsters','Defeat the king at the Town of Monsters','Defeat the Baron Castle basement throne','Complete the Giant of Bab-il','Complete Cave Bahamut','Conquer the vanilla Murasame altar','Conquer the vanilla Crystal Sword altar','Conquer the vanilla White Spear altar','Conquer the vanilla Ribbon room','Conquer the vanilla Masamune altar','Burn village Mist with the Package','Cure the fever with the SandRuby','Unlock the sewer with the Baron Key','Break the Dark Elf`s spell with the TwinHarp','Open the Toroia treasury with the Earth Crystal','Drop the Magma Key into the Agart well','Destroy the Super Cannon','Unlock the Sealed Cave','Raise the Big Whale','Trade away the Rat Tail','Have Kokkol forge Legend Sword with Adamant','Wake Yang with the Pan','Return the Pan to Yang\'s wife','Trade away the Pink Tail','Unlock the Pass door in Toroia'];
 
 var trappedchestcounts = [3,1,1,1,1,1,4,7,1,9];
@@ -279,24 +299,24 @@ function SetModes() {
 									switch (mode[j]) {
 										case 'CLASSICFORGE':
 											modeflags.oforge = true;
-											objectives[0] = 0;
+											SetObjectiveEnabled(0,0);
 											break;
 										case 'CLASSICGIANT':
 											modeflags.ogiant = true;
-											objectives[1] = 0;
+											SetObjectiveEnabled(1,0);
 											break;
 										case 'FIENDS':
 											modeflags.ofiends = true;
-											objectives[23] = 0;
-											objectives[24] = 0;
-											objectives[29] = 0;
-											objectives[32] = 0;
-											objectives[38] = 0;
-											objectives[44] = 0;
+											SetObjectiveEnabled(23,0);
+											SetObjectiveEnabled(24,0);
+											SetObjectiveEnabled(29,0);
+											SetObjectiveEnabled(32,0);
+											SetObjectiveEnabled(38,0);
+											SetObjectiveEnabled(44,0);
 											break;
 										case 'DKMATTER':
 											modeflags.odarkmatter = true;
-											objectives[3] = 0;
+											SetObjectiveEnabled(3,0);
 											//document.getElementById('dkmatterspan').style.display = 'inherit';
 											break;
 									}
@@ -334,12 +354,12 @@ function SetModes() {
 								var wincondition = keys[k].substring(4);
 								if (wincondition === 'GAME') {
 									modeflags.owin = 'game';
-									objectives[98] = 0;
-									objectives[99] = 2;
+									SetObjectiveEnabled(98,0);
+									SetObjectiveEnabled(99,2);
 								} else {
 									modeflags.owin = 'crystal';
-									objectives[98] = 2;
-									objectives[99] = 0;
+									SetObjectiveEnabled(98,2);
+									SetObjectiveEnabled(99,0);
 								}
 							} else if (keys[k].startsWith('REQ')) {
 								var questreq = keys[k].substring(4);
@@ -348,262 +368,262 @@ function SetModes() {
 								var currentkey = keys[k].substr(2).toLowerCase();
 								switch (currentkey) {
 									case 'char_cecil':
-										objectives[4] = 0;
+										SetObjectiveEnabled(4,0);
 										break;
 									case 'char_kain':
-										objectives[5] = 0;
+										SetObjectiveEnabled(5,0);
 										break;
 									case 'char_rydia':
-										objectives[6] = 0;
+										SetObjectiveEnabled(6,0);
 										break;
 									case 'char_tellah':
-										objectives[7] = 0;
+										SetObjectiveEnabled(7,0);
 										break;
 									case 'char_edward':
-										objectives[8] = 0;
+										SetObjectiveEnabled(8,0);
 										break;
 									case 'char_rosa':
-										objectives[9] = 0;
+										SetObjectiveEnabled(9,0);
 										break;
 									case 'char_yang':
-										objectives[10] = 0;
+										SetObjectiveEnabled(10,0);
 										break;
 									case 'char_palom':
-										objectives[11] = 0;
+										SetObjectiveEnabled(11,0);
 										break;
 									case 'char_porom':
-										objectives[12] = 0;
+										SetObjectiveEnabled(12,0);
 										break;
 									case 'char_cid':
-										objectives[13] = 0;
+										SetObjectiveEnabled(13,0);
 										break;
 									case 'char_edge':
-										objectives[14] = 0;
+										SetObjectiveEnabled(14,0);
 										break;
 									case 'char_fusoya':
-										objectives[15] = 0;
+										SetObjectiveEnabled(15,0);
 										break;
 									case 'boss_dmist':
-										objectives[16] = 0;
+										SetObjectiveEnabled(16,0);
 										break;
 									case 'boss_officer':
-										objectives[17] = 0;
+										SetObjectiveEnabled(17,0);
 										break;
 									case 'boss_octomamm':
-										objectives[18] = 0;
+										SetObjectiveEnabled(18,0);
 										break;
 									case 'boss_antlion':
-										objectives[19] = 0;
+										SetObjectiveEnabled(19,0);
 										break;
 									case 'boss_waterhag':
-										objectives[20] = 0;
+										SetObjectiveEnabled(20,0);
 										break;
 									case 'boss_mombomb':
-										objectives[21] = 0;
+										SetObjectiveEnabled(21,0);
 										break;
 									case 'boss_fabulgauntlet':
-										objectives[22] = 0;
+										SetObjectiveEnabled(22,0);
 										break;
 									case 'boss_milon':
-										objectives[23] = 0;
+										SetObjectiveEnabled(23,0);
 										break;
 									case 'boss_milonz':
-										objectives[24] = 0;
+										SetObjectiveEnabled(24,0);
 										break;
 									case 'boss_mirrorcecil':
-										objectives[25] = 0;
+										SetObjectiveEnabled(25,0);
 										break;
 									case 'boss_guard':
-										objectives[26] = 0;
+										SetObjectiveEnabled(26,0);
 										break;
 									case 'boss_karate':
-										objectives[27] = 0;
+										SetObjectiveEnabled(27,0);
 										break;
 									case 'boss_baigan':
-										objectives[28] = 0;
+										SetObjectiveEnabled(28,0);
 										break;
 									case 'boss_kainazzo':
-										objectives[29] = 0;
+										SetObjectiveEnabled(29,0);
 										break;
 									case 'boss_darkelf':
-										objectives[30] = 0;
+										SetObjectiveEnabled(30,0);
 										break;
 									case 'boss_magus':
-										objectives[31] = 0;
+										SetObjectiveEnabled(31,0);
 										break;
 									case 'boss_valvalis':
-										objectives[32] = 0;
+										SetObjectiveEnabled(32,0);
 										break;
 									case 'boss_calbrena':
-										objectives[33] = 0;
+										SetObjectiveEnabled(33,0);
 										break;
 									case 'boss_golbez':
-										objectives[34] = 0;
+										SetObjectiveEnabled(34,0);
 										break;
 									case 'boss_lugae':
-										objectives[35] = 0;
+										SetObjectiveEnabled(35,0);
 										break;
 									case 'boss_darkimp':
-										objectives[36] = 0;
+										SetObjectiveEnabled(36,0);
 										break;
 									case 'boss_kingqueen':
-										objectives[37] = 0;
+										SetObjectiveEnabled(37,0);
 										break;
 									case 'boss_rubicant':
-										objectives[38] = 0;
+										SetObjectiveEnabled(38,0);
 										break;
 									case 'boss_evilwall':
-										objectives[39] = 0;
+										SetObjectiveEnabled(39,0);
 										break;
 									case 'boss_asura':
-										objectives[40] = 0;
+										SetObjectiveEnabled(40,0);
 										break;
 									case 'boss_leviatan':
-										objectives[41] = 0;
+										SetObjectiveEnabled(41,0);
 										break;
 									case 'boss_odin':
-										objectives[42] = 0;
+										SetObjectiveEnabled(42,0);
 										break;
 									case 'boss_bahamut':
-										objectives[43] = 0;
+										SetObjectiveEnabled(43,0);
 										break;
 									case 'boss_elements':
-										objectives[44] = 0;
+										SetObjectiveEnabled(44,0);
 										break;
 									case 'boss_cpu':
-										objectives[45] = 0;
+										SetObjectiveEnabled(45,0);
 										break;
 									case 'boss_paledim':
-										objectives[46] = 0;
+										SetObjectiveEnabled(46,0);
 										break;
 									case 'boss_wyvern':
-										objectives[47] = 0;
+										SetObjectiveEnabled(47,0);
 										break;
 									case 'boss_plague':
-										objectives[48] = 0;
+										SetObjectiveEnabled(48,0);
 										break;
 									case 'boss_dlunar':
-										objectives[49] = 0;
+										SetObjectiveEnabled(49,0);
 										break;
 									case 'boss_ogopogo':
-										objectives[50] = 0;
+										SetObjectiveEnabled(50,0);
 										break;
 									case 'quest_mistcave':
-										objectives[51] = 0;
+										SetObjectiveEnabled(51,0);
 										break;
 									case 'quest_waterfall':
-										objectives[52] = 0;
+										SetObjectiveEnabled(52,0);
 										break;
 									case 'quest_antlionnest':
-										objectives[53] = 0;
+										SetObjectiveEnabled(53,0);
 										break;
 									case 'quest_hobs':
-										objectives[54] = 0;
+										SetObjectiveEnabled(54,0);
 										break;
 									case 'quest_fabul':
-										objectives[55] = 0;
+										SetObjectiveEnabled(55,0);
 										break;
 									case 'quest_ordeals':
-										objectives[56] = 0;
+										SetObjectiveEnabled(56,0);
 										break;
 									case 'quest_baroninn':
-										objectives[57] = 0;
+										SetObjectiveEnabled(57,0);
 										break;
 									case 'quest_baroncastle':
-										objectives[58] = 0;
+										SetObjectiveEnabled(58,0);
 										break;
 									case 'quest_magnes':
-										objectives[59] = 0;
+										SetObjectiveEnabled(59,0);
 										break;
 									case 'quest_zot':
-										objectives[60] = 0;
+										SetObjectiveEnabled(60,0);
 										break;
 									case 'quest_dwarfcastle':
-										objectives[61] = 0;
+										SetObjectiveEnabled(61,0);
 										break;
 									case 'quest_lowerbabil':
-										objectives[62] = 0;
+										SetObjectiveEnabled(62,0);
 										break;
 									case 'quest_falcon':
-										objectives[63] = 0;
+										SetObjectiveEnabled(63,0);
 										break;
 									case 'quest_sealedcave':
-										objectives[64] = 0;
+										SetObjectiveEnabled(64,0);
 										break;
 									case 'quest_monsterqueen':
-										objectives[65] = 0;
+										SetObjectiveEnabled(65,0);
 										break;
 									case 'quest_monsterking':
-										objectives[66] = 0;
+										SetObjectiveEnabled(66,0);
 										break;
 									case 'quest_baronbasement':
-										objectives[67] = 0;
+										SetObjectiveEnabled(67,0);
 										break;
 									case 'quest_giant':
-										objectives[68] = 0;
+										SetObjectiveEnabled(68,0);
 										break;
 									case 'quest_cavebahamut':
-										objectives[69] = 0;
+										SetObjectiveEnabled(69,0);
 										break;
 									case 'quest_murasamealtar':
-										objectives[70] = 0;
+										SetObjectiveEnabled(70,0);
 										break;
 									case 'quest_crystalaltar':
-										objectives[71] = 0;
+										SetObjectiveEnabled(71,0);
 										break;
 									case 'quest_whitealtar':
-										objectives[72] = 0;
+										SetObjectiveEnabled(72,0);
 										break;
 									case 'quest_ribbonaltar':
-										objectives[73] = 0;
+										SetObjectiveEnabled(73,0);
 										break;
 									case 'quest_masamunealtar':
-										objectives[74] = 0;
+										SetObjectiveEnabled(74,0);
 										break;
 									case 'quest_burnmist':
-										objectives[75] = 0;
+										SetObjectiveEnabled(75,0);
 										break;
 									case 'quest_curefever':
-										objectives[76] = 0;
+										SetObjectiveEnabled(76,0);
 										break;
 									case 'quest_unlocksewer':
-										objectives[77] = 0;
+										SetObjectiveEnabled(77,0);
 										break;
 									case 'quest_music':
-										objectives[78] = 0;
+										SetObjectiveEnabled(78,0);
 										break;
 									case 'quest_toroiatreasury':
-										objectives[79] = 0;
+										SetObjectiveEnabled(79,0);
 										break;
 									case 'quest_magma':
-										objectives[80] = 0;
+										SetObjectiveEnabled(80,0);
 										break;
 									case 'quest_supercannon':
-										objectives[81] = 0;
+										SetObjectiveEnabled(81,0);
 										break;
 									case 'quest_unlocksealedcave':
-										objectives[82] = 0;
+										SetObjectiveEnabled(82,0);
 										break;
 									case 'quest_bigwhale':
-										objectives[83] = 0;
+										SetObjectiveEnabled(83,0);
 										break;
 									case 'quest_traderat':
-										objectives[84] = 0;
+										SetObjectiveEnabled(84,0);
 										break;
 									case 'quest_forge':
-										objectives[85] = 0;
+										SetObjectiveEnabled(85,0);
 										break;
 									case 'quest_wakeyang':
-										objectives[86] = 0;
+										SetObjectiveEnabled(86,0);
 										break;
 									case 'quest_tradepan':
-										objectives[87] = 0;
+										SetObjectiveEnabled(87,0);
 										break;
 									case 'quest_tradepink':
-										objectives[88] = 0;
+										SetObjectiveEnabled(88,0);
 										break;
 									case 'quest_pass':
-										objectives[89] = 0;
+										SetObjectiveEnabled(89,0);
 										break;
 								}
 							}
@@ -1984,7 +2004,10 @@ function ApplyChecks(){
 	}
 	
 	//Items
+	var bHasUnderworld = keyitems[KeyItem.HOOK] > 0 || keyitems[KeyItem.MAGMA_KEY] > 0;
 	var itemcount = 0;
+	var inGoMode = true;
+	var canBeInGoMode = false;
 	for (var i = 0; i < 18; i++) {
 		var l = 'item' + i.toString();
         if (keyitems[i] >= 1) {
@@ -1992,19 +2015,50 @@ function ApplyChecks(){
 			//if (pkey === true && i === 17) {
 				//itemcount++;
 			//}
+			canBeInGoMode = true;
 			if (i != KeyItem.PASS) {
 				itemcount++;
 			}
         }
 
+		var newStyle = '';
         if (keyitems[i] == 1) {
-			document.getElementById(l).style = 'background-image: url(\'images/item' + i + '_a.png\')';
+			newStyle = 'background-image: url(\'images/item' + i + '_a.png\')';
         } else if (keyitems[i] == 2) {
-            document.getElementById(l).style = 'outline:1px solid green; background-image: url(\'images/done.png\'), url(\'images/item' + i + '_a.png\')';
+            newStyle = 'outline:1px solid green; background-image: url(\'images/done.png\'), url(\'images/item' + i + '_a.png\')';
 		} else {
-			document.getElementById(l).style = 'background-image: url(\'images/item' + i + '.png\')';
+			newStyle = 'background-image: url(\'images/item' + i + '.png\')';
 		}
+
+		if (keyitemsRequiredForGoMode[i] > 0)
+		{
+			if (keyitems[i] >= 1)
+			{
+				newStyle = 'background-color: rgba(100,255,100,0.2);' + newStyle;
+			}
+			else if( bHasUnderworld && (i == KeyItem.HOOK || i == KeyItem.MAGMA_KEY) && keyitemsRequiredForGoMode[i] == 2)
+			{
+				newStyle = newStyle;
+			}
+			else 
+			{
+				inGoMode = false;
+				newStyle = 'background-color: rgba(255,100,100,0.2);' + newStyle;
+			}
+		}
+	
+		document.getElementById(l).style = newStyle;
 	}
+
+	if (inGoMode && canBeInGoMode)
+	{
+		document.getElementById('gomodeDiv').style.display = 'block'
+		console.log("GO MODE!!");
+	}
+	else{
+		document.getElementById('gomodeDiv').style.display = 'none'
+	}
+
 	
 	if (itemcount > maxitems) {
 		itemcount = maxitems;
@@ -2535,6 +2589,88 @@ function CloseItems() {
 	}
 }
 
+function RefreshRequiredKeyItems()
+{
+	for ( var i=0 ; i< keyitemsRequiredForGoMode.length ; i++)
+	{
+		keyitemsRequiredForGoMode[i] = false;
+	}
+
+	SetRequiredKeyItems(58, [KeyItem.BARON_KEY]) //"Liberate Baron Castle"
+	SetRequiredKeyItems(59, [KeyItem.TWINHARP]) //"Complete Cave Magnes"
+	SetRequiredKeyItems(60, [KeyItem.EARTH_CRYSTAL]) //"Complete the Tower of Zot"
+	SetRequiredKeyItems(61, [KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Defeat the bosses of Dwarf Castle"
+	SetRequiredKeyItems(62, [KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Defeat the boss of Lower Bab-il"
+	SetRequiredKeyItems(63, [KeyItem.HOOK]) //"Launch the Falcon"
+	SetRequiredKeyItems(64, [KeyItem.LUCA_KEY, KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Complete the Sealed Cave"
+	SetRequiredKeyItems(65, [KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Defeat the queen at the Town of Monsters"
+	SetRequiredKeyItems(66, [KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Defeat the king at the Town of Monsters"
+	SetRequiredKeyItems(67, [KeyItem.BARON_KEY]) //"Defeat the Baron Castle basement throne"
+	SetRequiredKeyItems(68, [KeyItem.DARKNESS_CRYSTAL]) //"Complete the Giant of Bab-il"
+	SetRequiredKeyItems(69, [KeyItem.DARKNESS_CRYSTAL]) //"Complete Cave Bahamut"
+	SetRequiredKeyItems(70, [KeyItem.DARKNESS_CRYSTAL]) //"Conquer the vanilla Murasame altar"
+	SetRequiredKeyItems(71, [KeyItem.DARKNESS_CRYSTAL]) //"Conquer the vanilla Crystal Sword altar"
+	SetRequiredKeyItems(72, [KeyItem.DARKNESS_CRYSTAL]) //"Conquer the vanilla White Spear altar"
+	SetRequiredKeyItems(73, [KeyItem.DARKNESS_CRYSTAL]) //"Conquer the vanilla Ribbon room"
+	SetRequiredKeyItems(74, [KeyItem.DARKNESS_CRYSTAL]) //"Conquer the vanilla Masamune altar"
+	SetRequiredKeyItems(75, [KeyItem.PACKAGE]) //"Burn village Mist with the Package"
+	SetRequiredKeyItems(76, [KeyItem.SANDRUBY]) //"Cure the fever with the SandRuby"
+	SetRequiredKeyItems(77, [KeyItem.BARON_KEY]) //"Unlock the sewer with the Baron Key"
+	SetRequiredKeyItems(78, [KeyItem.TWINHARP]) //"Break the Dark Elf's spell with the TwinHarp"
+	SetRequiredKeyItems(79, [KeyItem.EARTH_CRYSTAL]) //"Open the Toroia treasury with the Earth Crystal"
+	SetRequiredKeyItems(80, [KeyItem.MAGMA_KEY]) //"Drop the Magma Key into the Agart well"
+	SetRequiredKeyItems(81, [KeyItem.TOWER_KEY, KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Destroy the Super Cannon"
+	SetRequiredKeyItems(82, [KeyItem.LUCA_KEY, KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Unlock the Sealed Cave"
+	SetRequiredKeyItems(83, [KeyItem.DARKNESS_CRYSTAL]) //"Raise the Big Whale"
+	SetRequiredKeyItems(84, [KeyItem.RAT_TAIL, KeyItem.HOOK]) //"Trade away the Rat Tail"
+	SetRequiredKeyItems(85, [KeyItem.LEGEND, KeyItem.ADAMANT, KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Have Kokkol forge Legend Sword with Adamant"
+	SetRequiredKeyItems(86, [KeyItem.PAN, KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Wake Yang with the Pan"
+	SetRequiredKeyItems(87, [KeyItem.PAN, KeyItem.HOOK, KeyItem.MAGMA_KEY]) //"Return the Pan to Yang's wife"
+	SetRequiredKeyItems(88, [KeyItem.PINK_TAIL, KeyItem.HOOK]) //"Trade away the Pink Tail"
+	SetRequiredKeyItems(89, [KeyItem.PASS]) //"Unlock the Pass door in Toroia"
+
+	ApplyChecks();
+}
+
+function SetRequiredKeyItems(desiredObjectiveIndex, keyItems)
+{
+	var bWantsUnderground = false;
+	var bWantHook = false;
+	var bWantsMagma = false;
+	for(var j=0 ; j < keyItems.length ; j++)
+	{
+		if (keyItems[j] == KeyItem.MAGMA_KEY)
+		{
+			bWantsMagma = true;
+		}
+		if (keyItems[j] == KeyItem.HOOK)
+		{
+			bWantHook = true;
+		}
+	}
+	bWantsUnderground = bWantHook && bWantsMagma;
+	for (var objectiveIndex = 0; objectiveIndex < 98; objectiveIndex++) 
+	{
+		if (objectives[objectiveIndex] == 0 && desiredObjectiveIndex == objectiveIndex)
+		{
+			for(var j=0 ; j < keyItems.length ; j++)
+			{
+				var itemValue = 1;
+				if (bWantsUnderground && (keyItems[j] == KeyItem.MAGMA_KEY || keyItems[j] == KeyItem.HOOK))
+				{
+					// Only set value of 2 (which means it's paired with another, optional key item) if something else hasn't already set it
+					if (keyitemsRequiredForGoMode[keyItems[j]] == 0)
+					{
+						itemValue = 2;
+					}
+				}
+
+				keyitemsRequiredForGoMode[keyItems[j]] = itemValue;
+			}
+		}
+	}
+}
+
 function SetObjectives() {
 	if (disableobjectivetracker === '0') {
 		for (var i = 0; i < 98; i++) {
@@ -2582,7 +2718,6 @@ function ChangeObjective(i) {
 	document.getElementById('objectivescharacterdiv').style.display = 'none';
 	document.getElementById('objectivesbossdiv').style.display = 'none';
 	document.getElementById('objectivesquestsdiv').style.display = 'none';	
-	
 }
 
 function CloseObjectives() {
@@ -2609,10 +2744,33 @@ function LoadObjectiveDetail(i) {
 	}
 }
 
-function SetObjective(i) {
-	var objectivetochange = document.getElementById('randomobjective' + objectivechange).innerHTML = objectivenames[i];
+
+function SetObjectiveEnabled(i, val)
+{
+	var knownObjective = document.getElementById('objective' + i);
+	if (knownObjective)
+	{
+		console.log(`setting objective #${i} to ${knownObjective.innerHTML} ${val}`);
+	}
+	objectives[i] = val;
+	RefreshRequiredKeyItems();
+}
+
+function SetRandomObjective(i) {
+	var previousObjective = document.getElementById('randomobjective' + objectivechange).innerHTML;
+	for (var objectiveIndex=0 ; objectiveIndex < objectivenames.length ; objectiveIndex++)
+	{
+		if (previousObjective == objectivenames[objectiveIndex])
+		{
+			console.log("Previous objective was "+previousObjective);
+			objectives[objectiveIndex + 4]= 2;
+		}
+	}
+	var objectiveToChange = document.getElementById('randomobjective' + objectivechange).innerHTML = objectivenames[i];
 
 	$('#objectiveModal').hide();
+	RefreshRequiredKeyItems();
+	SetObjectiveEnabled(i+4, 0);
 }
 
 function ViewMystery() {
@@ -2644,53 +2802,53 @@ function CloseMystery() {
 		modeflags.owin = document.getElementById('mystery_owin').value;
 	
 		if (modeflags.owin === 'game') {
-			objectives[98] = 0;
-			objectives[99] = 2;
+			SetObjectiveEnabled(98,0);
+			SetObjectiveEnabled(99,2);
 		} else {
-			objectives[98] = 2;
-			objectives[99] = 0;
+			SetObjectiveEnabled(98,2);
+			SetObjectiveEnabled(99,0);
 		}	
 
 		modeflags.oforge = document.getElementById('mystery_oforge').checked;
 		
 		if (modeflags.oforge) {
-			objectives[0] = 0;
+			SetObjectiveEnabled(0,0);
 		} else {
-			objectives[0] = 2;
+			SetObjectiveEnabled(0,2);
 		}
 		
 		modeflags.ogiant = document.getElementById('mystery_ogiant').checked;
 
 		if (modeflags.ogiant) {
-			objectives[1] = 0;
+			SetObjectiveEnabled(1,0);
 		} else {
-			objectives[1] = 2;
+			SetObjectiveEnabled(1,2);
 		}
 		
 		modeflags.ofiends = document.getElementById('mystery_ofiends').checked;
 
 		if (modeflags.ofiends) {
-			objectives[23] = 0;
-			objectives[24] = 0;
-			objectives[29] = 0;
-			objectives[32] = 0;
-			objectives[38] = 0;
-			objectives[44] = 0;
+			SetObjectiveEnabled(23,0);
+			SetObjectiveEnabled(24,0);
+			SetObjectiveEnabled(29,0);
+			SetObjectiveEnabled(32,0);
+			SetObjectiveEnabled(38,0);
+			SetObjectiveEnabled(44,0);
 		} else {
-			objectives[23] = 2;
-			objectives[24] = 2;
-			objectives[29] = 2;
-			objectives[32] = 2;
-			objectives[38] = 2;
-			objectives[44] = 2;
+			SetObjectiveEnabled(23,2);
+			SetObjectiveEnabled(24,2);
+			SetObjectiveEnabled(29,2);
+			SetObjectiveEnabled(32,2);
+			SetObjectiveEnabled(38,2);
+			SetObjectiveEnabled(44,2);
 		}
 		
 		modeflags.odarkmatter = document.getElementById('mystery_odarkmatter').checked;
 		
 		if (modeflags.odarkmatter) {
-			objectives[3] = 0;
+			SetObjectiveEnabled(3,0);
 		} else {
-			objectives[3] = 2;
+			SetObjectiveEnabled(3,2);
 		}
 		
 		modeflags.orandomcount = document.getElementById('mystery_oquests').value;
@@ -2787,6 +2945,7 @@ function CloseMystery() {
 		
 		SetFlagOptions();
 		SetObjectives();
+		RefreshRequiredKeyItems();
 		ApplyChecks();
 	} else {
 		menutoggle = false;
