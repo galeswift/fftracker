@@ -2025,7 +2025,7 @@ function ApplyChecks(){
         if (keyitems[i] == 1) {
 			newStyle = 'background-image: url(\'images/item' + i + '_a.png\')';
         } else if (keyitems[i] == 2) {
-            newStyle = 'outline:1px solid green; background-image: url(\'images/done.png\'), url(\'images/item' + i + '_a.png\')';
+            newStyle = 'background-image: url(\'images/done.png\'), url(\'images/item' + i + '_a.png\')';
 		} else {
 			newStyle = 'background-image: url(\'images/item' + i + '.png\')';
 		}
@@ -2034,7 +2034,7 @@ function ApplyChecks(){
 		{
 			if (keyitems[i] >= 1)
 			{
-				newStyle = 'background-color: rgba(100,255,100,0.2);' + newStyle;
+				newStyle = 'outline: 1px solid rgba(100,255,100,1);' + newStyle;
 			}
 			else if( bHasUnderworld && (i == KeyItem.HOOK || i == KeyItem.MAGMA_KEY) && keyitemsRequiredForGoMode[i] == 2)
 			{
@@ -2043,7 +2043,7 @@ function ApplyChecks(){
 			else 
 			{
 				inGoMode = false;
-				newStyle = 'background-color: rgba(255,100,100,0.2);' + newStyle;
+				newStyle = 'outline: 1px solid rgba(255,100,100,1);' + newStyle;
 			}
 		}
 	
@@ -2052,11 +2052,11 @@ function ApplyChecks(){
 
 	if (inGoMode && canBeInGoMode)
 	{
-		document.getElementById('gomodeDiv').style.display = 'block'
+		document.getElementById('gomodeDiv').classList.add("inGoMode");
 		console.log("GO MODE!!");
 	}
 	else{
-		document.getElementById('gomodeDiv').style.display = 'none'
+		document.getElementById('gomodeDiv').classList.remove("inGoMode");
 	}
 
 	
