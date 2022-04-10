@@ -2034,7 +2034,7 @@ function ApplyChecks(){
 		{
 			if (keyitems[i] >= 1)
 			{
-				newStyle = 'outline: 1px solid rgba(100,255,100,1);' + newStyle;
+				newStyle = 'background-color: rgba(100,255,100,.3); outline:1px solid green;' + newStyle;
 			}
 			else if( bHasUnderworld && (i == KeyItem.HOOK || i == KeyItem.MAGMA_KEY) && keyitemsRequiredForGoMode[i] == 2)
 			{
@@ -2043,7 +2043,7 @@ function ApplyChecks(){
 			else 
 			{
 				inGoMode = false;
-				newStyle = 'outline: 1px solid rgba(255,100,100,1);' + newStyle;
+				newStyle = 'background-color: rgba(255,100,100,.3); outline:1px solid red;' + newStyle;
 			}
 		}
 	
