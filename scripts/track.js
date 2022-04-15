@@ -2659,7 +2659,7 @@ function SetRequiredKeyItems(desiredObjectiveIndex, keyItems)
 				if (bWantsUnderground && (keyItems[j] == KeyItem.MAGMA_KEY || keyItems[j] == KeyItem.HOOK))
 				{
 					// Only set value of 2 (which means it's paired with another, optional key item) if something else hasn't already set it
-					if (keyitemsRequiredForGoMode[keyItems[j]] == 0)
+					if (keyitemsRequiredForGoMode[keyItems[j]] != 1)
 					{
 						itemValue = 2;
 					}
