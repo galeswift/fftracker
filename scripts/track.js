@@ -2248,11 +2248,8 @@ var timerObject;
 var timerSecondsElapsed = 0;
 
 function timerUpdate() {
-    var delta = Date.now() - timerStartTime;
-    timerStartTime = Date.now();
-
-    timerSecondsElapsed += delta;
-    document.getElementById('timerDiv').innerHTML = convertHMS(timerSecondsElapsed);
+    var delta = Date.now() - timerStartTime;    
+    document.getElementById('timerDiv').innerHTML = convertHMS(timerSecondsElapsed + delta);
 }
 
 function StartTimer() {
@@ -2270,6 +2267,10 @@ function StartTimer() {
 
 function PauseTimer() {
     clearInterval(timerObject)
+	var delta = Date.now() - timerStartTime;
+    timerStartTime = Date.now();
+
+    timerSecondsElapsed += delta;
     document.getElementById('timerDiv').classList.add('timerPaused')
     document.getElementById('timerDiv').classList.remove('timerRunning')
 
