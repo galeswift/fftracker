@@ -33,7 +33,7 @@ var keyItemNames = [
 "Crystal",
 "Pass"
 ]
-var objectivenames = ['Get Cecil','Get Kain','Get Rydia','Get Tellah','Get Edward','Get Rosa','Get Yang','Get Palom','Get Porom','Get Cid','Get Edge','Get FuSoYa','Defeat D.Mist','Defeat Officer','Defeat Octomamm','Defeat Antlion','Defeat Waterhag (boss version)','Defeat MomBomb','Defeat the Fabul Gauntlet','Defeat Milon','Defeat Milon Z.','Defeat D.Knight','Defeat the Guards (boss)','Defeat Karate','Defeat Baigan','Defeat Kainazzo','Defeat the Dark Elf (dragon form)','Defeat the Magus Sisters','Defeat Valvalis','Defeat Calbrena','Defeat Golbez','Defeat Dr. Lugae','Defeat the Dark Imps (boss)','Defeat K.Eblan and Q.Eblan','Defeat Rubicant','Defeat EvilWall','Defeat Asura','Defeat Leviatan','Defeat Odin','Defeat Bahamut','Defeat Elements','Defeat CPU','Defeat Pale Dim','Defeat Wyvern','Defeat Plague','Defeat the D.Lunars','Defeat Ogopogo','Defeat the boss of the Mist Cave','Defeat the boss of the Waterfall','Complete the Antlion Nest','Rescue the hostage on Mt. Hobs','Defend Fabul','Complete Mt. Ordeals','Defeat the bosses of Baron Inn','Liberate Baron Castle','Complete Cave Magnes','Complete the Tower of Zot','Defeat the bosses of Dwarf Castle','Defeat the boss of Lower Bab-il','Launch the Falcon','Complete the Sealed Cave','Defeat the queen at the Town of Monsters','Defeat the king at the Town of Monsters','Defeat the Baron Castle basement throne','Complete the Giant of Bab-il','Complete Cave Bahamut','Conquer the vanilla Murasame altar','Conquer the vanilla Crystal Sword altar','Conquer the vanilla White Spear altar','Conquer the vanilla Ribbon room','Conquer the vanilla Masamune altar','Burn village Mist with the Package','Cure the fever with the SandRuby','Unlock the sewer with the Baron Key','Break the Dark Elf`s spell with the TwinHarp','Open the Toroia treasury with the Earth Crystal','Drop the Magma Key into the Agart well','Destroy the Super Cannon','Unlock the Sealed Cave','Raise the Big Whale','Trade away the Rat Tail','Have Kokkol forge Legend Sword with Adamant','Wake Yang with the Pan','Return the Pan to Yang\'s wife','Trade away the Pink Tail','Unlock the Pass door in Toroia'];
+var objectivenames = ['Get Cecil','Get Kain','Get Rydia','Get Tellah','Get Edward','Get Rosa','Get Yang','Get Palom','Get Porom','Get Cid','Get Edge','Get FuSoYa','Defeat D.Mist','Defeat Officer','Defeat Octomamm','Defeat Antlion','Defeat Waterhag (boss version)','Defeat MomBomb','Defeat the Fabul Gauntlet','Defeat Milon','Defeat Milon Z.','Defeat D.Knight','Defeat the Guards (boss)','Defeat Karate','Defeat Baigan','Defeat Kainazzo','Defeat the Dark Elf (dragon form)','Defeat the Magus Sisters','Defeat Valvalis','Defeat Calbrena','Defeat Golbez','Defeat Dr. Lugae','Defeat the Dark Imps (boss)','Defeat K.Eblan and Q.Eblan','Defeat Rubicant','Defeat EvilWall','Defeat Asura','Defeat Leviatan','Defeat Odin','Defeat Bahamut','Defeat Elements','Defeat CPU','Defeat Pale Dim','Defeat Wyvern','Defeat Plague','Defeat the D.Lunars','Defeat Ogopogo','Defeat the boss of the Mist Cave','Defeat the boss of the Waterfall','Complete the Antlion Nest','Rescue the hostage on Mt. Hobs','Defend Fabul','Complete Mt. Ordeals','Defeat the bosses of Baron Inn','Liberate Baron Castle','Complete Cave Magnes','Complete the Tower of Zot','Defeat the bosses of Dwarf Castle','Defeat the boss of Lower Bab-il','Launch the Falcon','Complete the Sealed Cave','Defeat the queen at the Town of Monsters','Defeat the king at the Town of Monsters','Defeat the Baron Castle basement throne','Complete the Giant of Bab-il','Complete Cave Bahamut','Conquer the vanilla Murasame altar','Conquer the vanilla Crystal Sword altar','Conquer the vanilla White Spear altar','Conquer the vanilla Ribbon room','Conquer the vanilla Masamune altar','Burn village Mist with the Package','Cure the fever with the SandRuby','Unlock the sewer with the Baron Key','Break the Dark Elf\'s spell with the TwinHarp','Open the Toroia treasury with the Earth Crystal','Drop the Magma Key into the Agart well','Destroy the Super Cannon','Unlock the Sealed Cave','Raise the Big Whale','Trade away the Rat Tail','Have Kokkol forge Legend Sword with Adamant','Wake Yang with the Pan','Return the Pan to Yang\'s wife','Trade away the Pink Tail','Unlock the Pass door in Toroia'];
 
 var trappedchestcounts = [3,1,1,1,1,1,4,7,1,9];
 var trappedchestmaxcounts = [3,1,1,1,1,1,4,7,1,9];
@@ -1276,69 +1276,69 @@ function SetFlagOptions() {
 		document.getElementById('party1').style.visibility = 'hidden';
 	}
 	
-	//Exclude characters
-	if (!modeflags.ccecil) {
-		document.getElementById('character0').style.opacity = '0.2';
-		document.getElementById('character0_x').style.visibility = 'visible';
-		excludedCharacters += 'Cecil ';
-	}
-	if (!modeflags.ckain) {
-		document.getElementById('character1').style.opacity = '0.2';
-		document.getElementById('character1_x').style.visibility = 'visible';
-		excludedCharacters += 'Kain ';
-	}
-	if (!modeflags.crydia) {
-		document.getElementById('character2').style.opacity = '0.2';
-		document.getElementById('character2_x').style.visibility = 'visible';
-		excludedCharacters += 'Rydia ';
-	}
-	if (!modeflags.ctellah) {
-		document.getElementById('character3').style.opacity = '0.2';
-		document.getElementById('character3_x').style.visibility = 'visible';
-		excludedCharacters += 'Tellah ';
-	}
-	if (!modeflags.cedward) {
-		document.getElementById('character4').style.opacity = '0.2';
-		document.getElementById('character4_x').style.visibility = 'visible';
-		excludedCharacters += 'Edward ';
-	}
-	if (!modeflags.crosa) {
-		document.getElementById('character5').style.opacity = '0.2';
-		document.getElementById('character5_x').style.visibility = 'visible';
-		excludedCharacters += 'Rosa ';
-	}
-	if (!modeflags.cyang) {
-		document.getElementById('character6').style.opacity = '0.2';
-		document.getElementById('character6_x').style.visibility = 'visible';
-		excludedCharacters += 'Yang ';
-	}
-	if (!modeflags.cpalom) {
-		document.getElementById('character7').style.opacity = '0.2';
-		document.getElementById('character7_x').style.visibility = 'visible';
-		excludedCharacters += 'Palom ';
-	}
-	if (!modeflags.cporom) {
-		document.getElementById('character8').style.opacity = '0.2';
-		document.getElementById('character8_x').style.visibility = 'visible';
-		excludedCharacters += 'Porom ';
-	}
-	if (!modeflags.ccid) {
-		document.getElementById('character9').style.opacity = '0.2';
-		document.getElementById('character9_x').style.visibility = 'visible';
-		excludedCharacters += 'Cid ';
-	}
-	if (!modeflags.cedge) {
-		document.getElementById('character10').style.opacity = '0.2';
-		document.getElementById('character10_x').style.visibility = 'visible';
-		excludedCharacters += 'Edge ';
-	}
-	if (!modeflags.cfusoya) {
-		document.getElementById('character11').style.opacity = '0.2';
-		document.getElementById('character11_x').style.visibility = 'visible';
-		excludedCharacters += 'FuSoYa ';
-	}
-	
 	if (!modeflags.chero) {
+
+		if (!modeflags.ccecil) {
+			document.getElementById('character0').style.opacity = '0.2';
+			document.getElementById('character0_x').style.visibility = 'visible';
+			excludedCharacters += 'Cecil ';
+		}
+		if (!modeflags.ckain) {
+			document.getElementById('character1').style.opacity = '0.2';
+			document.getElementById('character1_x').style.visibility = 'visible';
+			excludedCharacters += 'Kain ';
+		}
+		if (!modeflags.crydia) {
+			document.getElementById('character2').style.opacity = '0.2';
+			document.getElementById('character2_x').style.visibility = 'visible';
+			excludedCharacters += 'Rydia ';
+		}
+		if (!modeflags.ctellah) {
+			document.getElementById('character3').style.opacity = '0.2';
+			document.getElementById('character3_x').style.visibility = 'visible';
+			excludedCharacters += 'Tellah ';
+		}
+		if (!modeflags.cedward) {
+			document.getElementById('character4').style.opacity = '0.2';
+			document.getElementById('character4_x').style.visibility = 'visible';
+			excludedCharacters += 'Edward ';
+		}
+		if (!modeflags.crosa) {
+			document.getElementById('character5').style.opacity = '0.2';
+			document.getElementById('character5_x').style.visibility = 'visible';
+			excludedCharacters += 'Rosa ';
+		}
+		if (!modeflags.cyang) {
+			document.getElementById('character6').style.opacity = '0.2';
+			document.getElementById('character6_x').style.visibility = 'visible';
+			excludedCharacters += 'Yang ';
+		}
+		if (!modeflags.cpalom) {
+			document.getElementById('character7').style.opacity = '0.2';
+			document.getElementById('character7_x').style.visibility = 'visible';
+			excludedCharacters += 'Palom ';
+		}
+		if (!modeflags.cporom) {
+			document.getElementById('character8').style.opacity = '0.2';
+			document.getElementById('character8_x').style.visibility = 'visible';
+			excludedCharacters += 'Porom ';
+		}
+		if (!modeflags.ccid) {
+			document.getElementById('character9').style.opacity = '0.2';
+			document.getElementById('character9_x').style.visibility = 'visible';
+			excludedCharacters += 'Cid ';
+		}
+		if (!modeflags.cedge) {
+			document.getElementById('character10').style.opacity = '0.2';
+			document.getElementById('character10_x').style.visibility = 'visible';
+			excludedCharacters += 'Edge ';
+		}
+		if (!modeflags.cfusoya) {
+			document.getElementById('character11').style.opacity = '0.2';
+			document.getElementById('character11_x').style.visibility = 'visible';
+			excludedCharacters += 'FuSoYa ';
+		}
+			
 		document.getElementById('heroHeaderDiv').style.display = 'none';
 		document.getElementById('party0').classList.remove('hero');
 	} else {
@@ -1476,9 +1476,9 @@ function SetFlagOptions() {
 		document.getElementById('townsdiv').style.width = "160px";
 	}
 	
-    if (useBeta != "false" && modeflags.ktrap && !modeflags.kmoon && !modeflags.kunsafer) {
-        trappedchestlocations[9] = 2;
-    }
+	if (modeflags.ktrap && !modeflags.kmoon) {
+		trappedchestlocations[9] = 2;
+	}
 
 	if (!modeflags.ksummon) {
 		keyitemlocations[KeyItemCheck.BARON_ODIN] = 3; //Odin
@@ -1525,19 +1525,20 @@ function SetFlagOptions() {
 		characterlocations[CharacterCheck.MYSIDIA] = 3;
 		characterlocations[CharacterCheck.WATERWAY] = 3;
 	}
-	
 
-    if (modeflags.cnoearned) {
-        characterlocations[CharacterCheck.MT_HOBS] = 3;
-        characterlocations[CharacterCheck.KAIPO] = 3;
-        characterlocations[CharacterCheck.BARON_INN] = 3;
-        characterlocations[CharacterCheck.BARON_CASTLE] = 3;
-        characterlocations[CharacterCheck.TOWER_ZOT] = 3;
-        characterlocations[CharacterCheck.DWARF] = 3;
-        characterlocations[CharacterCheck.EBLAN_CAVE] = 3;
-        characterlocations[CharacterCheck.MOON] = 3;
-        characterlocations[CharacterCheck.GIANT_BABIL] = 3;
-    }
+	if (modeflags.cnoearned) {
+		characterlocations[CharacterCheck.MIST] = 3;
+		characterlocations[CharacterCheck.KAIPO] = 3;
+		characterlocations[CharacterCheck.MT_HOBS] = 3;
+		characterlocations[CharacterCheck.BARON_CASTLE] = 3;
+		characterlocations[CharacterCheck.BARON_INN] = 3;
+		characterlocations[CharacterCheck.TOWER_ZOT] = 3;
+		characterlocations[CharacterCheck.DWARF] = 3;
+		characterlocations[CharacterCheck.EBLAN_CAVE] = 3;
+		characterlocations[CharacterCheck.MOON] = 3;
+		characterlocations[CharacterCheck.GIANT_BABIL] = 3;
+
+	}
 
     if (modeflags.nkey) {
 		keyitemlocations[KeyItemCheck.TOROIA] = 3;
@@ -1836,7 +1837,7 @@ function ApplyChecks(){
 			ActivateCharacterLocation(CharacterCheck.DWARF);
 		}
 		
-		if (characterlocations[CharacterCheck.DWARF] === 2) {
+		if (characterlocations[CharacterCheck.DWARF] === 2 || keyitemlocations[KeyItemCheck.DWARF] === 2) {
 			rydia = true;
 		} else {
 			rydia = false;
@@ -2095,7 +2096,7 @@ function ApplyChecks(){
 				document.getElementById(l).style.display = "none";
 			}
 		} else {
-			if (keyitemlocations[i] === 2 && i != 28) {
+			if ((keyitemlocations[i] === 2 || keyitemlocations[i] === 4) && i != 28) {
 				document.getElementById(l).style.display = "block";
 				//document.getElementById(l).style.color = "#FFF";
 				document.getElementById(l).style.setProperty("text-decoration", "none");
@@ -2338,7 +2339,7 @@ function SwapKeyItemLocation(locationId) {
 		if (locationId === KeyItemCheck.DWARF && modeflags.gwarp) {
 			keyitemlocations[KeyItemCheck.WARP_GLITCH] = 1;
 		}
-	} else if (keyitemlocations[locationId] === 2) {
+	} else if (keyitemlocations[locationId] === 2 || keyitemlocations[locationId] === 4)  {
 		keyitemlocations[locationId] = 1;
         var timestampElement = document.getElementById("timestamp_id_" + locationId);
         if (timestampElement) {
